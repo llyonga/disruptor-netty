@@ -21,7 +21,11 @@ import io.netty.handler.logging.LoggingHandler;
  */
 public class NettyServer {
 
-    public NettyServer() {
+    public NettyServer(int port) {
+        init(port);
+    }
+
+    private void init(int port) {
         //1、创建两个工作线程组，一个负责接受网络连接，一个负责业务逻辑处理
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
@@ -43,7 +47,7 @@ public class NettyServer {
                         }
                     });
             //绑定端口，同步等待请求
-            ChannelFuture channelFuture = serverBootstrap.bind(8765).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
             System.err.println("Server Startup...");
             channelFuture.channel().closeFuture().sync();
 
@@ -55,6 +59,5 @@ public class NettyServer {
             workGroup.shutdownGracefully();
             System.err.println("Sever ShutDown...");
         }
-
     }
 }
