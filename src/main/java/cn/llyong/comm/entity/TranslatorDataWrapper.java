@@ -13,7 +13,7 @@ import lombok.Data;
  * @version: 1.0
  */
 @Data
-public class TranslatorDataWapper {
+public class TranslatorDataWrapper {
 
     private TranslatorData data;
     private ChannelHandlerContext ctx;
