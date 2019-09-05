@@ -1,5 +1,6 @@
 package cn.llyong.netty;
 
+import cn.llyong.netty.handler.ServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.*;
@@ -36,7 +37,9 @@ public class NettyServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-
+                            //添加编码、解码
+                            //添加ServerHandler操作
+                            socketChannel.pipeline().addLast(new ServerHandler());
                         }
                     });
             //绑定端口，同步等待请求
